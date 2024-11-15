@@ -1,5 +1,5 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: nginx
 spec:
@@ -10,5 +10,6 @@ spec:
   ports:
   - name: nginx-svc-port
     protocol: TCP
-    port: {{ .Values.service.port }} # service port
-    targetPort: 80 # container port
+    port: {{ .Values.service.port }}
+    targetPort: 80
+  

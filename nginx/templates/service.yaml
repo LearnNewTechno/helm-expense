@@ -5,9 +5,8 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   selector:
-    project: expense
-    module: bckend
-    environment: dev
+    tier: frontend
+    app: nginx
   ports:
   - name: nginx-svc-port
     protocol: TCP

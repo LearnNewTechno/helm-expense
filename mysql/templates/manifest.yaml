@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: expense
+  labels:
+    app: mysql
+    tier: db
+    project: expense
+spec:
+  replicas: 1 # defalut 1 only
+  selector:
+    matchLabels:
+      tier: db
+      app: mysql
+      project: expense
+  template:
+    metadata:
+      labels:
+        tier: db
+        app: mysql
+        project: expense
+    spec:
+      containers:
+      - name: mysql
+        image: saanvilikhith/mysql:{{ .Values.deployment.imageVersion }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: expense
+spec:
+  selector:
+    app: mysql
+    tier: db
+    project: expense
+  ports:
+  - name: mysql-svc-port
+    protocol: TCP
+    port: 3306
+    targetPort: 3306 # container port
